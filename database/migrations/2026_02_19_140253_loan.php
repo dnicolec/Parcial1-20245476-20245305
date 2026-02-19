@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('loan', function (Blueprint $table) {
-            // name_user, date_loan, hora_loan, book_reference, date_returned
             $table->id('loan_id');
             $table->string('name_user')->after('loan_id');
-            $table->date('date_loan')->after('name_user');
-            $table->time('hora_loan')->after('date_loan');
-            $table->string('book_reference')->after('hora_loan');
-            $table->date('date_returned')->nullable()->after('book_reference');
+            $table->foreignId('book_id')->constrained('books')->after('name_user');
+            $table->date('date_loan')->after('book_id');
+            $table->time('hour_loan')->after('date_loan');
+            $table->date('date_returned')->nullable()->after('hour_loan');
             $table->timestamps();
         });
     }

@@ -8,11 +8,12 @@ class Loan extends Model
 {
     protected $table = 'loan';
     protected $primaryKey = 'loan_id';
+    
     protected $fillable = [
         'name_user',
+        'book_id',
         'date_loan',
-        'hora_loan',
-        'book_reference',
-        'date_returned'
+        'hour_loan',
+        'date_returned',
     ];
 }

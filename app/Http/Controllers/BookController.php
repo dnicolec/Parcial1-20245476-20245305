@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
@@ -12,17 +13,24 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        $avaible = filter_var(
-            $request->query('status') ?? $request->query('is_avaible'), FILTER_VALIDATE_BOOLEAN
-        );
-    
-        $query = $avaible ? $request->query('is_avaible') : Book::query();
+        $query = Book::query();
+
+        if ($request->titulo) {
+            $query->where('title', 'like', '%'.$request->titulo.'%');
+        }
+
+        if ($request->isbn) {
+            $query->where('isbn', $request->isbn);
+        }
+
+        if ($request->status) {
+            $available = filter_var($request->status, FILTER_VALIDATE_BOOLEAN);
+            $query->where('is_available', $available);
+        }
+
         $books = $query->get();
 
-        return response()->json(
-            BookResource::collection($books)
-        );
-
+        return response()->json(BookResource::collection($books));
     }
 
     /**

@@ -11,7 +11,7 @@ class Book extends Model
         'description',
         'isbn',
         'total_copies',
-        'avaible_copies',
-        'is_avaible',
+        'available_copies',
+        'is_available',
         ];
 }

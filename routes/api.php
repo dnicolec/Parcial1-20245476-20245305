@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'v1'], function () {
-    Route::get('/books', [BookController::class,'index']);
-    Route::get('/books/{isbn}', [BookController::class,'index']);
-    Route::get('/books/{title}', [BookController::class,'index']);
-    Route::get('/books/{is_aviable}', [BookController::class,'index']);
-});
+Route::get('/books', [BookController::class, 'index']);
+Route::post('/loans', [LoanController::class, 'store']);
+Route::post('/returns/{loan_id}', [LoanController::class, 'returnBook']);
