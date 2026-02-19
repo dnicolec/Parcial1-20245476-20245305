@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('isbn')->unique()->after('title');
             $table->integer('total_copies')->after('descrpition');
             $table->string('aviable_copies')->after('total_copies');
-            $table->boolean('is_aviable')->after('aviable_copies');
+            $table->boolean('is_avaible')->after('aviable_copies');
         });
     }
 

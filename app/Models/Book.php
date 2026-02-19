@@ -12,6 +12,6 @@ class Book extends Model
         'isbn',
         'total_copies',
         'avaible_copies',
-        'is_aviable',
+        'is_avaible',
         ];
 }

@@ -10,9 +10,14 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
+        $avaible = filter_var(
+            $request->query('status') ?? $request->query('is_avaible'), FILTER_VALIDATE_BOOLEAN
+        );
+    
+        $query = $avaible ? $request->query('is_avaible') : Book::query();
+        $books = $query->get();
 
         return response()->json(
             BookResource::collection($books)
